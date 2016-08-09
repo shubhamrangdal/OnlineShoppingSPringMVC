@@ -1,5 +1,10 @@
 package com.bitwise.OnlineShopping.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +24,7 @@ import com.bitwise.OnlineShopping.model.LoginValidator;
 
 @Controller
 @RequestMapping("/")
-//@SessionAttributes("login")
+
 public class LoginController {
 @Autowired
 LoginBean login;
@@ -34,10 +39,7 @@ LoginValidator loginValidator;
          model.addAttribute("login", loginbean);
          return "Login";
     }
-//     @InitBinder
-//     private void initBinder(WebDataBinder binder) {
-//         binder.setValidator(loginValidator);
-//     }
+
     @RequestMapping(method = RequestMethod.POST)
     public String submitForm(@ModelAttribute("login") LoginBean loginbean,
                             BindingResult result,Model model)//, SessionStatus status) 
@@ -48,8 +50,10 @@ LoginValidator loginValidator;
     
       loginValidator.validate(login, result);
       if(!result.hasErrors()){
-    	   if(username.equals("Shubham") && password.equals("12345"))    	   
+    	   if(username.equals("Shubham") && password.equals("12345"))   { 	   
     		   url="redirect:/success";
+    		   
+    	   }
     	   else
     		   url="Login";
       }

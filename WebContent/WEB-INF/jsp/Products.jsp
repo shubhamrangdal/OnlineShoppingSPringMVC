@@ -11,13 +11,15 @@
 </head>
 <body>
 <h3>Products</h3>
-	<form:form method="post"  commandName="products"   >
+	<form:form method="post"  commandName="products" action="/OnlineShoppingApplicationSpring/addtoCart" >
 		<c:forEach items="${map1}" var="mapvar">
             <tr>
-                <td><form:checkbox path="map" value="${mapvar.key}"  /></td>
+                <td><form:checkbox path="list" value="${mapvar.key}"  /></td>
                 <td><c:out value="${mapvar.key}" /><br><br></td>
             </tr>
         </c:forEach>
-        <input type="submit" value="submit"  ></form:form>
+        <input type="submit" value="Add To Cart" onclick="/OnlineShoppingApplicationSpring/addtoCart">
+         <input type="submit" value="Display Cart" onclick="/OnlineShoppingApplicationSpring/displayCart">
+ </form:form>
 </body>
 </html>

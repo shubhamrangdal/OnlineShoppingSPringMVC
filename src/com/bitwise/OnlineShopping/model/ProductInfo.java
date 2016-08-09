@@ -1,22 +1,29 @@
 package com.bitwise.OnlineShopping.model;
 
 public class ProductInfo {
-	String name,  color;
-	int size,quantity;
+	
+	private String name,  color;
+	private int size,quantity,stock;
 	double price;
 	
-	public ProductInfo(String name, double price, String color, int size, int quantity) {
+	public ProductInfo(String name, double price, String color, int size, int quantity,int stock) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.color = color;
 		this.size = size;
 		this.quantity = quantity;
+		this.stock=stock;
 	}
 	
-	
-	public ProductInfo() {
+
+
+	@Override
+	public String toString() {
+		return "ProductInfo  name = " + name + ", color = " + color + ", size = " + size + ", quantity = " + quantity
+				+ ", remaining stock = " + stock + ", price = " + price + "]";
 	}
+
 
 
 	public String getName() {
@@ -49,5 +56,17 @@ public class ProductInfo {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+
+
+	public int getStock() {
+		return stock;
+	}
+
+
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 }

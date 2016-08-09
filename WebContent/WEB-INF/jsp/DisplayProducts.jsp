@@ -6,20 +6,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-<h3>Display Product</h3>
-	<form:form method="get"  commandName="products"   >
+<h3>Cart Items </h3>
+	<form:form   commandName="products"  method="post" action="/OnlineShoppingApplicationSpring/deleteFromCart" >
 		<c:forEach items="${map}" var="mapvar"><%-- ${mapvar} <br /> --%>
 			<tr>
-                <td><form:checkbox path="map" value="${mapvar}"  /></td>
-                <td><c:out value="${mapvar}" /><br><br></td>
+                <td><form:checkbox path="list" value="${mapvar}"  /></td>
+                <td><c:out value="${mapvar.key}  Quantity  =  ${mapvar }" /><br><br></td>
             </tr>	
 		</c:forEach>
-		<input type="submit" value="Add to Cart">
-		<input type="submit" value="delete from cart">
+		<input type="submit" value="Add to cart" >
+		<input type="submit" value="delete from cart" onclick="/OnlineShoppingApplicationSpring/deleteFromCart">
 	</form:form>
 </body>
 </html>

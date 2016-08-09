@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-</body>
+	<h1>Deleted</h1>
+	<a href="DisplayProducts.jsp">cart</a></body>
 </html>
