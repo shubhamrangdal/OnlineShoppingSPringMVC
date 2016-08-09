@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,7 +25,6 @@ import com.bitwise.OnlineShopping.model.LoginValidator;
 
 @Controller
 @RequestMapping("/")
-
 public class LoginController {
 @Autowired
 LoginBean login;
@@ -42,7 +42,8 @@ LoginValidator loginValidator;
 
     @RequestMapping(method = RequestMethod.POST)
     public String submitForm(@ModelAttribute("login") LoginBean loginbean,
-                            BindingResult result,Model model)//, SessionStatus status) 
+                            BindingResult result,ModelMap model,HttpServletRequest request, 
+                            HttpServletResponse response,HttpSession session) 
     {
        String username=loginbean.getUsername();
        String password=loginbean.getPassword();
@@ -50,12 +51,23 @@ LoginValidator loginValidator;
     
       loginValidator.validate(login, result);
       if(!result.hasErrors()){
-    	   if(username.equals("Shubham") && password.equals("12345"))   { 	   
+    	   if(username.equals("Shubham") && password.equals("12345"))   {
+    		   model.addAttribute("login", loginbean);
     		   url="redirect:/success";
+    		    session = request.getSession(true);
+    			
+    			session.setAttribute("username", username);
+    			session.setAttribute("sessID", session.getId());
+    			session.setMaxInactiveInterval(1000);
+    			Cookie cookie = new Cookie("sessID", session.getId());
+    			cookie.setMaxAge(10000);
+    			response.addCookie(cookie);
     		   
     	   }
-    	   else
+    	   else{
+    		   model.addAttribute("error", "invalidUser");
     		   url="Login";
+    	   }
       }
      else
     	   url="Login";

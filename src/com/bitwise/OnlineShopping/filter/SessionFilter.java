@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class SessionFilter
  */
-@WebFilter("/SessionFilter")
+@WebFilter({"/Products","/DisplayProducts"})
 public class SessionFilter implements Filter {
 
     /**
@@ -39,7 +39,7 @@ public class SessionFilter implements Filter {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         HttpSession session = httpServletRequest.getSession(false);
-        String loginURI = httpServletRequest.getContextPath() + "/";
+        String loginURI = httpServletRequest.getContextPath() + "/Login";
        
         boolean loggedIn = session != null && session.getAttribute("username") != null;
         boolean loginRequest = httpServletRequest.getRequestURI().equals(loginURI);
