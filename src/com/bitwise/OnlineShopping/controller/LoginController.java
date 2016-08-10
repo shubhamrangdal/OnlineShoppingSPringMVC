@@ -65,7 +65,7 @@ LoginValidator loginValidator;
     			session.setMaxInactiveInterval(1000);  		   
     	   }
     	   else{
-    		   
+    		   model.addAttribute("error", "Invalid User !!!! Please Enter Correct Username Or Password");
     		   url="Login";
     	   }
       }

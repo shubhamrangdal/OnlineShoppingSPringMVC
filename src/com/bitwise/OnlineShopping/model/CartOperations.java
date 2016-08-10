@@ -54,13 +54,13 @@ public class CartOperations {
 			String [] st=key.split("=");
 			System.out.println(st[0]);
 			productinfo=mapcart.get(key);
-			if(productinfo.getQuantity()==1)
+			/*if(productinfo.getQuantity()==1)
 				mapcart.remove(st[0]);
 			else{
 				productinfo.setStock(productinfo.getStock()+1);
 				productinfo.setQuantity(productinfo.getQuantity()-1);
 				mapcart.put(st[0], new ProductInfo(productinfo.getName(), productinfo.getPrice(), productinfo.getColor(), productinfo.getSize(), productinfo.getQuantity(),productinfo.getStock()));
-			}
+			}*/
 			mapcart.remove(st[0]);
 		}
 		return mapcart;
