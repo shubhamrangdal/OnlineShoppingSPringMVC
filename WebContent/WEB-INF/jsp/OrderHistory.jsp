@@ -11,13 +11,9 @@
 </head>
 <body>
 <h1>Total Sum is ${sum }</h1>
-	<form:form   commandName="products"  method="post" action="/OnlineShoppingApplicationSpring/placeOrder" >
-		<c:forEach items="${map}" var="mapvar"><%-- ${mapvar} <br /> --%>
-			<tr>
-                <td><c:out value="${mapvar.key} " /><br><br></td>
-            </tr>	
-            
-		</c:forEach>
+	<form:form    method="post" action="/OnlineShoppingApplicationSpring/Logout" >
+	
+	<input type="submit" value="Log Out" >
 		
 	</form:form>
 </body>

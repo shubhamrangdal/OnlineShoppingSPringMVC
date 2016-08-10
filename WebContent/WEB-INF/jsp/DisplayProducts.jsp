@@ -13,7 +13,7 @@
 <body>
 <h3>Cart Items </h3>
 	<form:form   commandName="products"  method="post" action="/OnlineShoppingApplicationSpring/deleteFromCart" >
-		<c:forEach items="${map}" var="mapvar"><%-- ${mapvar} <br /> --%>
+		<c:forEach items="${map}" var="mapvar">
 			<tr>
                 <td><form:checkbox path="list" value="${mapvar}"  /></td>
                 <td><c:out value="${mapvar.key}  ${mapvar }" /><br><br></td>

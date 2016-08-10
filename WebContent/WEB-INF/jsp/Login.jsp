@@ -25,7 +25,7 @@
 		Password :  
 					<form:input path="password" type="password"/>
 					<form:errors path="password" cssClass="error"/><br><br>
-					
+					<div style="color: red">${error }</div>
 		<input type="submit" value="Login"/>	
 	</form:form>
 </body>

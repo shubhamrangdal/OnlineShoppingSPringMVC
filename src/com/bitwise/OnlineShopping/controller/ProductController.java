@@ -82,6 +82,10 @@ public class ProductController {
 		
 		Map<String, ProductInfo> mapcart=cartOperations.getCartmap();
 		model.addAttribute("map",mapcart);
+		if(products.getList()==null){
+			model.addAttribute("producterror", "Please Select at Least One Detail !!!");
+			throw new RuntimeException();
+		}
 		model.addAttribute("list", products.getList());
 		
 	    session.setAttribute("map",mapcart); 
@@ -104,7 +108,10 @@ public class ProductController {
         
 		@SuppressWarnings("unchecked")
 		Map<String, ProductInfo> mapcart=(Map<String, ProductInfo>) session.getAttribute("map");
-		
+		if(products.getList()==null){
+			model.addAttribute("producterror", "Please Select at Least One Detail !!!");
+			throw new RuntimeException();
+		}
 		
 		model.addAttribute("list",products.getList());
 		cartOperations.deleteFromCart(products.getList(),mapcart);
@@ -124,17 +131,27 @@ public class ProductController {
 	{
 		System.out.println("in place order method");
 		HttpSession session=request.getSession(false);
-		 Map<String, ProductInfo> mapcart=(Map<String, ProductInfo>) session.getAttribute("map");
+		 Map<String, ProductInfo> mapcart2=(Map<String, ProductInfo>) session.getAttribute("map");
 		 //checking for map
-		 Iterator it = mapcart.entrySet().iterator();
+		 
+		 Iterator it = mapcart2.entrySet().iterator();
 		    while (it.hasNext()) {
 		        Map.Entry pair = (Map.Entry)it.next();
-		        System.out.println("key is "+pair.getKey() + " value is = " + pair.getValue());
+		        System.out.println("key is in Product Controller "+pair.getKey() + " value is = " + pair.getValue());
 		        it.remove(); // avoids a ConcurrentModificationException
 		    }
-		 double sum=cartOperations.placeOrder(mapcart);
+		    
+		 double sum=cartOperations.placeOrder(mapcart2);
 		 System.out.println("in controller of place order "+sum);
 		 model.addAttribute("sum",sum);
 		return new ModelAndView("OrderHistory", "sum", sum);
+	}
+	
+	@RequestMapping(value="/Logout",method=RequestMethod.POST)
+	public String LogOutSession(Model model,BindingResult result,HttpServletRequest request, 
+            HttpServletResponse response){
+		
+			request.getSession(false).invalidate();
+			return "redirect:/";
 	}
 }

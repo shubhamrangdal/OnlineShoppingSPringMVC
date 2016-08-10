@@ -28,7 +28,7 @@ public class CartOperations {
 			key=list.get(i);
 			productinfo=cartproduct.map1.get(key);
 			if(productinfo.getStock()==0){
-				System.out.println("Out of Stock");
+		    		throw new RuntimeException();
 			}
 			else{
 //				cartmap.put(key,productinfo);
@@ -50,17 +50,17 @@ public class CartOperations {
 		{
 			System.out.println("");
 			key=list.get(i);
-			System.out.println(key+"  <---  key");
+			
 			String [] st=key.split("=");
 			System.out.println(st[0]);
 			productinfo=mapcart.get(key);
-			/*if(productinfo.getQuantity()==1)
+			if(productinfo.getQuantity()==1)
 				mapcart.remove(st[0]);
 			else{
 				productinfo.setStock(productinfo.getStock()+1);
 				productinfo.setQuantity(productinfo.getQuantity()-1);
 				mapcart.put(st[0], new ProductInfo(productinfo.getName(), productinfo.getPrice(), productinfo.getColor(), productinfo.getSize(), productinfo.getQuantity(),productinfo.getStock()));
-			}*/
+			}
 			mapcart.remove(st[0]);
 		}
 		return mapcart;
@@ -72,19 +72,21 @@ public class CartOperations {
 		String key[] = null;
 		ProductInfo product []=new ProductInfo[mapcart.size()];
 		System.out.println("in place order");
-	
+		System.out.println("map size is "+mapcart.size());
 		Iterator it = mapcart.entrySet().iterator();
 	    while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
-	        System.out.println("key is "+pair.getKey() + " = " + pair.getValue());
+	        System.out.println("key is in cart Operations "+pair.getKey() + " = " + pair.getValue());
 	        key[i++]=(String) pair.getKey();
 	        product[i++]=(ProductInfo) pair.getValue();
 	        it.remove(); 
 	    }
-	    System.out.println("in place order");
-		for (int j=0;i<mapcart.size();j++)
+	    System.out.println("in place order  size is"+mapcart.size());
+		for (int j=0;j<mapcart.size();j++)
 		{
+			System.out.println("in for of place order price of "+key[i]+" is ");
 			sum=sum+mapcart.get(key[i]).getPrice();
+			System.out.println(sum+"in place order");
 		}
 		System.out.println(sum);
 		return sum;

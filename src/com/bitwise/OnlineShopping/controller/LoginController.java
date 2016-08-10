@@ -46,6 +46,7 @@ LoginValidator loginValidator;
                             BindingResult result ,ModelMap model,HttpServletRequest request, 
                             HttpServletResponse response,HttpSession session) 
     {
+    	
        String username=loginbean.getUsername();
        String password=loginbean.getPassword();
        String url="";
@@ -64,7 +65,7 @@ LoginValidator loginValidator;
     			session.setMaxInactiveInterval(1000);  		   
     	   }
     	   else{
-    		   model.addAttribute("error", "invalidUser");
+    		   
     		   url="Login";
     	   }
       }

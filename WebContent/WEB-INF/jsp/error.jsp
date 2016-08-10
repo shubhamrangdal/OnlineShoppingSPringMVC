@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${message}
+	<h3>Error Occured     ${producterror}</h3>
+	
 </body>
 </html>
