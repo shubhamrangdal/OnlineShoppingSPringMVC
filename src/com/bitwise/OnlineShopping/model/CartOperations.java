@@ -1,9 +1,14 @@
 package com.bitwise.OnlineShopping.model;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
+
+@Component
 public class CartOperations {
 	private Map<String, ProductInfo> cartmap=new HashMap<>();
 	Products cartproduct=new Products();
@@ -22,32 +27,68 @@ public class CartOperations {
 		for(int i=0;i<list.size();i++){
 			key=list.get(i);
 			productinfo=cartproduct.map1.get(key);
-			if(productinfo.getStock()==0)
+			if(productinfo.getStock()==0){
 				System.out.println("Out of Stock");
-			if(productinfo.getQuantity()==1&&productinfo.getStock()!=0){
-				cartmap.put(key,productinfo);
-				productinfo.setQuantity(productinfo.getQuantity()+1);
-				productinfo.setStock(productinfo.getStock()-1);
 			}
 			else{
+//				cartmap.put(key,productinfo);
 				productinfo.setQuantity(productinfo.getQuantity()+1);
+				productinfo.setStock(productinfo.getStock()-1);
+				productinfo.setPrice(productinfo.getQuantity()*productinfo.getPrice());
+			
+//				productinfo.setQuantity(productinfo.getQuantity()+1);
 				cartmap.remove(key);
-				
 				cartmap.put(key, new ProductInfo(productinfo.getName(), productinfo.getPrice(), productinfo.getColor(), productinfo.getSize(), productinfo.getQuantity(),productinfo.getStock()));
 			}
 			
-		}
-	}
+		}	}
 
-	public void deleteFromCart(List<String> list) {
+	public Map<String, ProductInfo> deleteFromCart(List<String> list, Map<String, ProductInfo> mapcart) {
 		String key;
 		System.out.println("in delete from Cart");
 		for(int i=0;i<list.size();i++)
 		{
 			System.out.println("");
 			key=list.get(i);
-			cartmap.remove(key);
+			System.out.println(key+"  <---  key");
+			String [] st=key.split("=");
+			System.out.println(st[0]);
+			productinfo=mapcart.get(key);
+			/*if(productinfo.getQuantity()==1)
+				mapcart.remove(st[0]);
+			else{
+				productinfo.setStock(productinfo.getStock()+1);
+				productinfo.setQuantity(productinfo.getQuantity()-1);
+				mapcart.put(st[0], new ProductInfo(productinfo.getName(), productinfo.getPrice(), productinfo.getColor(), productinfo.getSize(), productinfo.getQuantity(),productinfo.getStock()));
+			}*/
+			mapcart.remove(st[0]);
 		}
+		return mapcart;
+	}
+
+	public double placeOrder(Map<String, ProductInfo> mapcart) {
+		double sum=0.0;
+		int i=0;
+		String key[] = null;
+		ProductInfo product []=new ProductInfo[mapcart.size()];
+		System.out.println("in place order");
+	
+		Iterator it = mapcart.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        System.out.println("key is "+pair.getKey() + " = " + pair.getValue());
+	        key[i++]=(String) pair.getKey();
+	        product[i++]=(ProductInfo) pair.getValue();
+	        it.remove(); 
+	    }
+	    System.out.println("in place order");
+		for (int j=0;i<mapcart.size();j++)
+		{
+			sum=sum+mapcart.get(key[i]).getPrice();
+		}
+		System.out.println(sum);
+		return sum;
+		
 	}
 	
 }

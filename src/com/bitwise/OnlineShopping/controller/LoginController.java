@@ -37,12 +37,13 @@ LoginValidator loginValidator;
     {
          LoginBean loginbean = new LoginBean();
          model.addAttribute("login", loginbean);
+         
          return "Login";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String submitForm(@ModelAttribute("login") LoginBean loginbean,
-                            BindingResult result,ModelMap model,HttpServletRequest request, 
+                            BindingResult result ,ModelMap model,HttpServletRequest request, 
                             HttpServletResponse response,HttpSession session) 
     {
        String username=loginbean.getUsername();
@@ -50,19 +51,17 @@ LoginValidator loginValidator;
        String url="";
     
       loginValidator.validate(login, result);
+      
+      
       if(!result.hasErrors()){
-    	   if(username.equals("Shubham") && password.equals("12345"))   {
+    	   if(username.equals("Shubham") && password.equals("12345")){
     		   model.addAttribute("login", loginbean);
     		   url="redirect:/success";
     		    session = request.getSession(true);
     			
     			session.setAttribute("username", username);
     			session.setAttribute("sessID", session.getId());
-    			session.setMaxInactiveInterval(1000);
-    			Cookie cookie = new Cookie("sessID", session.getId());
-    			cookie.setMaxAge(10000);
-    			response.addCookie(cookie);
-    		   
+    			session.setMaxInactiveInterval(1000);  		   
     	   }
     	   else{
     		   model.addAttribute("error", "invalidUser");

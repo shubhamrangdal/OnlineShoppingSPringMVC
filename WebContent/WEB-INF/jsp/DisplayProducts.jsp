@@ -16,11 +16,20 @@
 		<c:forEach items="${map}" var="mapvar"><%-- ${mapvar} <br /> --%>
 			<tr>
                 <td><form:checkbox path="list" value="${mapvar}"  /></td>
-                <td><c:out value="${mapvar.key}  Quantity  =  ${mapvar }" /><br><br></td>
+                <td><c:out value="${mapvar.key}  ${mapvar }" /><br><br></td>
             </tr>	
 		</c:forEach>
-		<input type="submit" value="Add to cart" >
+		<form:errors path="list" cssClass="error" />
+		
 		<input type="submit" value="delete from cart" onclick="/OnlineShoppingApplicationSpring/deleteFromCart">
+	</form:form>
+	
+	<form:form commandName="products"  method="get" action="/OnlineShoppingApplicationSpring/success" >
+		<input type="submit" value="Add to cart" >
+	</form:form> 
+	
+	<form:form commandName="products"  method="post" action="/OnlineShoppingApplicationSpring/placeOrder" >
+		<input type="submit" value="Place Order" onclick="/OnlineShoppingApplicationSpring/placeOrder">
 	</form:form>
 </body>
 </html>

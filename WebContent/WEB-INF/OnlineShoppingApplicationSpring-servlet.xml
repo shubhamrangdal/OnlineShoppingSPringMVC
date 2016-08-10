@@ -25,5 +25,5 @@ http://www.springframework.org/schema/context/spring-context.xsd">
     <bean id="loginValidator" class="com.bitwise.OnlineShopping.model.LoginValidator" />
      <bean id="products" class="com.bitwise.OnlineShopping.model.Products" />
     
-    <bean id="login" class="com.bitwise.OnlineShopping.model.LoginBean"></bean>  
+    <bean id="login" class="com.bitwise.OnlineShopping.model.LoginBean"></bean> 
 </beans>

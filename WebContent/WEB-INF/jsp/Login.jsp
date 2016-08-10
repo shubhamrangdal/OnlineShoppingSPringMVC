@@ -20,11 +20,11 @@
 	<form:form method="POST"  commandName="login">    
 	
 		Username : 	
-					<form:input path="username"/><br><br>
-					<form:errors path="username" cssStyle="error"/>
+					<form:input path="username" />
+					<form:errors path="username" cssStyle="error"/><br><br>
 		Password :  
-					<form:input path="password"/><br><br>
-					<form:errors path="username" cssClass="error"/>
+					<form:input path="password" type="password"/>
+					<form:errors path="password" cssClass="error"/><br><br>
 					
 		<input type="submit" value="Login"/>	
 	</form:form>

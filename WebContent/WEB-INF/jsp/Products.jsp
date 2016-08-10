@@ -15,11 +15,14 @@
 		<c:forEach items="${map1}" var="mapvar">
             <tr>
                 <td><form:checkbox path="list" value="${mapvar.key}"  /></td>
-                <td><c:out value="${mapvar.key}" /><br><br></td>
+                <td><c:out value="${mapvar.key} " /><br><br></td>
             </tr>
         </c:forEach>
         <input type="submit" value="Add To Cart" onclick="/OnlineShoppingApplicationSpring/addtoCart">
-         <input type="submit" value="Display Cart" onclick="/OnlineShoppingApplicationSpring/displayCart">
+         
  </form:form>
+ <form:form method="post"  commandName="products" action="/OnlineShoppingApplicationSpring/displayCart" >
+ 		<input type="submit" value="Display Cart" onclick="/OnlineShoppingApplicationSpring/displayCart">
+ 	</form:form>
 </body>
 </html>
